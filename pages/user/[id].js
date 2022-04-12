@@ -2,14 +2,15 @@ import { useRouter } from 'next/router'
 import axios from "axios"
 import { useEffect,useState } from "react"
 
-export default function Profile(){
+export default function Profile({id}){
     const router = useRouter()
     const [user,setUser] =  useState({})
     useEffect(()=>{
-        axios.get(`http://localhost:5000/api/user/profile/${router.query.id}`)
+        alert('>>'+id)
+        axios.get(`http://localhost:5000/api/user/profile/${id}`)
         .then(res=>{
             setUser(res.data.user)
-        }).catch(err=>{})},[])
+        }).catch(err=>{console.log(err)})},[])
 return (
     <><h1>사용자 프로필</h1>
     <div>
