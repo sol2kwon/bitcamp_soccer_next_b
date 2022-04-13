@@ -1,31 +1,31 @@
 import React,{useState} from "react"
 import style from "board/style/board-form.module.css"
-import axios from "axios"
 import { useDispatch } from "react-redux"
 import { addBoard } from "../../redux/reducers/board.reducer"
-export default function AddBoard(){
-    const [value,setValue] = useState('');
+export default function Board(){
     const dispatch = useDispatch()
+    const [inputs,setInputs] = useState({})
 
-    return (<div className="todoapp stack-large">
+    const handleChange = e => {
+        const {name,value} = e.target
+        setInputs({...inputs,[name]:value})
+    }
+
+    return (<>
         <h1>게시글 등록</h1>
         <form onSubmit= {e=>{
             e.preventDefault()
-            alert('value?'+value)
-            if(value) dispatch(addBoard({task:value}))
+            if(inputs) dispatch(addBoard(inputs))
         }}>
-        
-        <div className={style.container}>
             <div className={style.row}>
                 <div className={style.col25}>
                 <label className={style.label} htmlFor="passengerId">글 제목</label>
                 </div>
                 <div className={style.col75}>
-                <input type="text" onChange={e=>setValue(e.target.value)} className={style.inputText}
+                <input type="text" onChange={handleChange} className={style.inputText}
                 id="title" name="title" placeholder="글 제목 입력"/>
                 </div>
             </div>
-            {/**
             <div className={style.row}>
                 <div className={style.col25}>
                 <label htmlFor="name">게시글 작성자 이름</label>
@@ -57,11 +57,10 @@ export default function AddBoard(){
                 </div>
             </div>
             <br/>
-            */}
+            
             <div className={style.row}>
                 <input type="submit" className={style.inputSubmit}
                 value="Submit"/>
             </div>
-            </div>
         </form>
-        </div>)}
+        </>)}
