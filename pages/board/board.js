@@ -1,7 +1,7 @@
 import React,{useState} from "react"
 import style from "board/style/board-form.module.css"
 import { useDispatch } from "react-redux"
-import { addBoard } from "../../redux/reducers/board.reducer"
+import { addBoard } from "../../redux/reducers/boardReducer.ts"
 export default function Board(){
     const dispatch = useDispatch()
     const [inputs,setInputs] = useState({})
