@@ -1,15 +1,24 @@
 .table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+  margin: 10px 0;
+  font-size: 15px;
+  min-width: 900px;
+  border: 1px solid black;
   }
-  
-  .td {
+  .table thead th {
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+  }
+  .table th,
+  .table td {
+    padding: 12px 15px;
     border: 1px solid black;
-    text-align: left;
-    padding: 8px;
+    text-align: center;
   }
-  
-  .tr {
+  .table tbody tr {
+    border: 1px solid black;
+  }
+  .table tbody tr:last-of-type {
     border: 1px solid black;
   }
