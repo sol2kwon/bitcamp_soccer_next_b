@@ -1,39 +1,72 @@
+import React,{useState} from 'react'
 import Link from "next/link";
-import styles from "common/style/Nav.module.css"
+import tableStyles from '../common/style/tableStyle.module.css'
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function Nav(){
+
+    const userUrls =["/user/join","/user/login","/user/logout","/user/getUsers","/user/updateUser","/user/withdrawUser"]
+    const userTitle = ["회원가입","로그인","로그아웃","사용자목록","사용자수정","회원탈퇴"]
+
+    
+    const basicUrls =["/basic/counter","/basic/calc","/basic/bmi"]
+    const basicTitle = ["카운터","계산기","BMI"]
+
+    const gameUrls = ["/game/addTeam/","/game/getTeam/","/game/modifyTeam/","/game/removeTeam/"
+                        ,"/game/addGame/","/game/getGame/","/game/modifyGame/","/game/removeGame/"]
+    const gameTitle = ["팀등록","팀목록","팀수정","팀삭제","게임등록","게임목록","게임수정","게임삭제"]
+
+    const todoUrls =["/todo/addTodo/","/todo/getTodo/","/todo/modifyTodo","/todo/removeTodo/"]
+    const todoTitle = ["스케줄등록","스케줄목록","스케줄수정","스케줄삭제"]
+
+    const boardUrls =["/board/addArticle/","/board/getArticles/","/board/modifyArticle/","removeArticle/",]
+    const boardTitle = ["게시글등록","게시글목록","게시글수정","게시글삭제"]
+
     return(
-        <nav className={styles.nav}>
-        <ul>
-        <li className={styles.li}><Link href='/'>메인</Link></li>
-        <li className={styles.li}><Link href='/admin/dashboard'>대쉬보드</Link></li>
-        <li className={styles.li}><Link href='/basic/calc'>계산기</Link></li>
-        <li className={styles.li}><Link href='/basic/counter'>카운터</Link></li>
-        <li className={styles.li}><Link href='/basic/bmi'>BMI</Link></li>
-        <li className={styles.li}><Link href='/game/addTeam/'>팀등록</Link></li>
-        <li className={styles.li}><Link href='/game/getTeam/'>팀목록</Link></li>
-        <li className={styles.li}><Link href='/game/modifyTeam/'>팀수정</Link></li>
-        <li className={styles.li}><Link href='/game/removeTeam/'>팀삭제</Link></li>
-        <li className={styles.li}><Link href='/game/addGame/'>게임등록</Link></li>
-        <li className={styles.li}><Link href='/game/getGame/'>게임목록</Link></li>
-        <li className={styles.li}><Link href='/game/modifyGame/'>게임수정</Link></li>
-        <li className={styles.li}><Link href='/game/removeGame/'>게임삭제</Link></li>
-        <li className={styles.li}><Link href='/todo/addTodo/'>투두등록</Link></li>
-        <li className={styles.li}><Link href='/todo/getTodo/'>투두목록</Link></li>
-        <li className={styles.li}><Link href='/todo/removeTodo/'>투두수정</Link></li>
-        <li className={styles.li}><Link href='/todo/addTodo/'>투두삭제</Link></li>
-        <li className={styles.li}><Link href='/board/addArticle/'>게시글등록</Link></li>
-        <li className={styles.li}><Link href='/board/getArticles/'>게시글목록</Link></li>
-        <li className={styles.li}><Link href='/board/modifyArticle/'>게시글수정</Link></li>
-        <li className={styles.li}><Link href='/board/removeArticle/'>게시글삭제</Link></li>
-        <li className={styles.li}><Link href='/user/join'>회원가입</Link></li>
-        <li className={styles.li}><Link href='/user/login'>로그인</Link></li>
-        <li className={styles.li}><Link href='/user/logout'>로그아웃</Link></li>
-        <li className={styles.li}><Link href='/user/getUsers'>사용자목록</Link></li>
-        <li className={styles.li}><Link href='/user/updateUser'>사용자수정</Link></li>
-        <li className={styles.li}><Link href='/user/withdrawUser'>회원탈퇴</Link></li>
-       
-        </ul>
-        </nav>
+        <table className={tableStyles.table}>
+        <tr>
+        <td>
+          <SubMenu title={"사용자"} urls={userUrls} subTitles={userTitle}/>
+          <SubMenu title={"베이직"} urls={basicUrls} subTitles={basicTitle}/>
+          <SubMenu title={"팀/게임"} urls={gameUrls} subTitles={gameTitle}/>
+          <SubMenu title={"스케줄"} urls={todoUrls} subTitles={todoTitle}/>
+          <SubMenu title={"게시판"} urls={boardUrls} subTitles={boardTitle}/>
+          </td>
+        </tr>
+      </table>
     );
-}
+  }
+  const SubMenu = (props) => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    return (<><Button
+          id="basic-button"
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+        >
+        {props.title}
+        </Button>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button'
+          }}
+        >
+           {props.urls.map(function(url, i){
+              return <MenuItem onClick={handleClose}><Link href={url} key={i}>{props.subTitles[i]}</Link></MenuItem>
+            })}
+        </Menu></>
+    )}
