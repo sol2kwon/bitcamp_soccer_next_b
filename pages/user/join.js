@@ -14,15 +14,16 @@ export default function  Join(){
         setUser({...user,[name]: value})
     }
     const handleClick = e => {
-        window.location.href="./login"
+        window.location.href = "./login"
     }
     return <form onSubmit={
         e => {
             e.preventDefault()
             dispatch(userActions.joinRequest(user))
-            setUser({
-                userid:'', password:'', email:'', name:'', phone:'', birth:'', address:''
-            })
+            // setUser({
+            //     userid:'', password:'', email:'', name:'', phone:'', birth:'', address:''
+            // })
+            // window.location.href="./login"
         }
     }
     >

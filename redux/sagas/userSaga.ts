@@ -1,7 +1,6 @@
-import { PayloadAction } from '@reduxjs/toolkit'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import { userActions } from '/redux/reducers/userReducer.ts';
-import { joinAPi,loginAPi } from '../api/userApi.ts'
+import { joinApi,loginApi } from '../api/userApi.ts'
 
 interface UserJoinType{
     type: string;
@@ -32,18 +31,23 @@ interface UserLoginSuccessType{
 
 function* join(user: UserJoinType){
     try{
-        const response : UserJoinSuccessType = yield joinAPi(user.payload)
+        const response : UserJoinSuccessType = yield joinApi(user.payload)
         yield put(userActions.joinSuccess(response))
     }catch(error){
+        alert('진행3: 사가 내부 조인 실패' + error)
          yield put(userActions.joinFailure(error))
     }
 }
 function* login(login: UserLoginType){
     try{
-        const response : UserLoginSuccessType = yield loginAPi(login.payload)
+        alert('진행3: 사가 내부 로그인 요청'+JSON.stringify(login))
+        const response : UserLoginSuccessType = yield loginApi(login.payload)
         yield put(userActions.loginSuccess(response))
+        window.location.href = '/'
     }catch(error){
-         yield put(userActions.joinFailure(error))
+        alert('진행3: 사가 내부 로그인 실패')
+         yield put(userActions.loginFailure(error))
+         window.location.href = '/user/login'
     }
 }
 export function* watchJoin(){

@@ -7,7 +7,7 @@ export default function  Login(){
         userid:'', password:''
     })
     const dispatch = useDispatch()
-    const handleChange = e=>{
+    const handleChange = e =>{
         e.preventDefault()
         const{name, value} = e.target;
         setLogin({...login,[name]: value})
