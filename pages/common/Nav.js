@@ -18,7 +18,7 @@ export default function Nav(){
                         ,"/game/addGame/","/game/getGame/","/game/modifyGame/","/game/removeGame/"]
     const gameTitle = ["팀등록","팀목록","팀수정","팀삭제","게임등록","게임목록","게임수정","게임삭제"]
 
-    const todoUrls =["/todo/addTodo/","/todo/getTodo/","/todo/modifyTodo","/todo/removeTodo/"]
+    const todoUrls =["/todo/addTodo/","/todo/getTodos/","/todo/modifyTodo","/todo/removeTodo/"]
     const todoTitle = ["스케줄등록","스케줄목록","스케줄수정","스케줄삭제"]
 
     const boardUrls =["/board/addArticle/","/board/getArticles/","/board/modifyArticle/","removeArticle/",]

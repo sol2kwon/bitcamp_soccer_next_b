@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import tableStyles from '../common/style/tableStyle.module.css'
+import tableStyles from '../common/styles/table.module.css'
 export default function Bmi() {
     const proxy = 'http://localhost:5000'
     const [inputs, setInputs] = useState({})
@@ -13,7 +13,7 @@ export default function Bmi() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post(proxy+'/api/basic/bmi', inputs)
+        axios.post(proxy+'/basic/bmi', inputs)
         .then(res => {
             const bmi = res.data
             document.getElementById('result-span').innerHTML = `
